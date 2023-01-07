@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
+    images: {
+        domains: ["img-api.neople.co.kr", "*"],
+    },
+    reactStrictMode: true,
+    swcMinify: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

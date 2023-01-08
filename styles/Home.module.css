@@ -1,6 +1,11 @@
 #char_main {
     display: flex;
 }
+.capture_button {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
 
 @media (max-width: 600px) {
     .grid {

@@ -1,6 +1,7 @@
 import React, { Suspense, useState } from "react";
 import SelectServer from "../components/server_select";
 import SearchCharacter from "../components/SearchCharacter";
+import styles from "../styles/Home.module.css";
 
 import html2canvas from "html2canvas";
 
@@ -13,27 +14,33 @@ export default function Home() {
             });
         }
     };
-    const [ss, setSs] = useState(false);
+    const [serverId, setServerId] = useState("cain");
+    const [characterName, setCharacterName] = useState("");
+    const characterNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setCharacterName(value);
+    };
+    const changeServer = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setServerId(e.target.value);
+    };
     const [cc, setCc] = useState(false);
     return (
         <div>
-            <h1>서버</h1>
-            <button onClick={() => setSs(!ss)}>서버</button>
-            {ss && (
-                <Suspense fallback={<h1>로딩중............ </h1>}>
-                    <SelectServer />
-                </Suspense>
-            )}
-            <h1>캐릭</h1>
-            <button onClick={() => setCc(!cc)}>캐릭</button>{" "}
+            <Suspense fallback={<h1>로딩중............ </h1>}>
+                <SelectServer serverId={serverId} fc={changeServer} />
+            </Suspense>
+            <input type="text" value={characterName} onChange={characterNameChange} />
+            <button onClick={() => setCc(!cc)}>캐릭</button> 
             <div id="char_info">
                 {cc && (
                     <Suspense fallback={<h1>로딩중... </h1>}>
-                        <SearchCharacter />
+                        <SearchCharacter serverId={serverId} characterName={characterName} />
                     </Suspense>
                 )}
             </div>
-            <button onClick={onCapture}>434</button>
+            <button className={styles.capture_button} onClick={onCapture}>
+                캡쳐
+            </button>
         </div>
     );
 }

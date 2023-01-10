@@ -16,6 +16,7 @@ export default function Home() {
     };
     const [serverId, setServerId] = useState("cain");
     const [characterName, setCharacterName] = useState("");
+    const [selectedCharacter, setSelectedCharacter] = useState({ serverId: "", characterName: "" });
     const characterNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setCharacterName(value);
@@ -23,20 +24,22 @@ export default function Home() {
     const changeServer = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setServerId(e.target.value);
     };
-    const [cc, setCc] = useState(false);
+    const [firstSearch, setFirstSearch] = useState(false);
     return (
         <div>
             <Suspense fallback={<h1>로딩중............ </h1>}>
                 <SelectServer serverId={serverId} fc={changeServer} />
             </Suspense>
             <input type="text" value={characterName} onChange={characterNameChange} />
-            <button onClick={() => setCc(!cc)}>캐릭</button> 
+            <button
+                onClick={() => {
+                    setSelectedCharacter({ serverId: serverId, characterName: characterName });
+                    !firstSearch && setFirstSearch(true);
+                }}>
+                캐릭
+            </button>
             <div id="char_info">
-                {cc && (
-                    <Suspense fallback={<h1>로딩중... </h1>}>
-                        <SearchCharacter serverId={serverId} characterName={characterName} />
-                    </Suspense>
-                )}
+                <Suspense fallback={<h1>로딩중... </h1>}> {firstSearch && <SearchCharacter selectedCharacter={selectedCharacter} />}</Suspense>
             </div>
             <button className={styles.capture_button} onClick={onCapture}>
                 캡쳐

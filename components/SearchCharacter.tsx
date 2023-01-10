@@ -6,8 +6,8 @@ import { CharInfo, CharStatus, EquipInfo } from "../types/Types";
 import styles from "../styles/Home.module.css";
 import EquipDetail from "../components/EquipDetail";
 
-export default function SearchCharacter({ serverId, characterName }: { serverId: string; characterName: string }) {
-    const char_info_response = useQuery<{ rows: CharInfo[] }, AxiosError>({ queryKey: ["char_info"], queryFn: async () => (await axios.get(`http://127.0.0.1:8000/df/servers/${serverId}/characters?characterName=${characterName}`)).data, suspense: true });
+export default function SearchCharacter({ selectedCharacter }: { selectedCharacter: { serverId: string; characterName: string } }) {
+    const char_info_response = useQuery<{ rows: CharInfo[] }, AxiosError>({ queryKey: ["char_info"], queryFn: async () => (await axios.get(`http://127.0.0.1:8000/df/servers/${selectedCharacter.serverId}/characters?characterName=${selectedCharacter.characterName}`)).data, suspense: true });
     const char_info = char_info_response?.data?.rows[0];
     const char_status_response = useQuery<CharStatus, AxiosError>({ queryKey: ["char_status"], queryFn: async () => (await axios.get(`http://127.0.0.1:8000/df/servers/${char_info?.serverId}/characters/${char_info?.characterId}/status`)).data, suspense: true });
     const char_status = char_status_response?.data;

@@ -1,2 +1,3 @@
 - EquipId로 장비이미지 정리
 - 프로필카드 디자인  
+-caputre button 클릭시 modal window에서 미리보기와 다운로드&복사 버튼 표시

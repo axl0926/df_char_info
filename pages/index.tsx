@@ -16,7 +16,7 @@ export default function Home() {
     };
     const [serverId, setServerId] = useState("cain");
     const [characterName, setCharacterName] = useState("");
-    const [selectedCharacter, setSelectedCharacter] = useState({ serverId: "", characterName: "" });
+    const [selectedCharacter, setSelectedCharacter] = useState({ serverId: serverId, characterName: characterName });
     const characterNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setCharacterName(value);
@@ -36,7 +36,7 @@ export default function Home() {
                     setSelectedCharacter({ serverId: serverId, characterName: characterName });
                     !firstSearch && setFirstSearch(true);
                 }}>
-                캐릭
+                검색
             </button>
             <div id="char_info">
                 <Suspense fallback={<h1>로딩중... </h1>}> {firstSearch && <SearchCharacter selectedCharacter={selectedCharacter} />}</Suspense>

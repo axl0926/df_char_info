@@ -1,0 +1,23 @@
+.item_icon::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    z-index: 2;
+}
+.normal::before {
+    background-image: url("/normal.png");
+}
+.over240::before {
+    background-image: url("/over240.png");
+}
+.over280::before {
+    background-image: url("/over280.png");
+}
+.over320::before {
+    background-image: url("/over320.png");
+}
+.itemBox{
+    display:flex;
+}

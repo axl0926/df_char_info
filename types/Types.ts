@@ -11,7 +11,7 @@ interface DefaultCharInfo {
     jobGrowName: string;
 }
 
-interface Status {
+export interface Status {
     name: string;
     value: number;
 }

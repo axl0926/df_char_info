@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { ItemSlot } from "../types/Types";
 import Image from "next/image";
+import styles from "../styles/item.module.css";
 
 export default function EquipDetail({ SlotInfo }: { SlotInfo: ItemSlot }) {
     const [showDropdown, setShowDropdown] = useState(false);
+
+    const itemClass = SlotInfo.growInfo && (SlotInfo.growInfo.total.level >= 320 ? "over320" : SlotInfo.growInfo.total.level >= 280 ? "over280" : SlotInfo.growInfo.total.level >= 240 ? "over240" : false);
     return (
-        <>
-            <h3 onClick={() => setShowDropdown(!showDropdown)}>장착 부위 : {SlotInfo.slotName}</h3>
+        <div className={styles.itemBox}>
+            <div onClick={() => setShowDropdown(!showDropdown)} className={` ${styles.item_icon} ${itemClass ? styles[itemClass] : styles.normal}`}>
+                <Image src={`https://img-api.neople.co.kr/df/items/${SlotInfo.itemId}`} width={28} height={28} alt={SlotInfo.itemName}></Image>
+            </div>
             {showDropdown && (
-                <>
-                    <Image src={`https://img-api.neople.co.kr/df/items/${SlotInfo.itemId}`} width={28} height={28} alt={SlotInfo.itemName}></Image>
-                    <div>{`아이템 명 : ${SlotInfo.itemName}`}</div>
-                    <div>{`아이템 타입 : ${SlotInfo.itemType}`}</div>
-                    <div>{`아이템 레어리티 : ${SlotInfo.itemRarity}`}</div>
-                </>
+                <div>
+                    <div>{` ${SlotInfo.itemName}`}</div>
+                    <div>{` ${SlotInfo.itemRarity}`}</div>
+                </div>
             )}
-        </>
+        </div>
     );
 }

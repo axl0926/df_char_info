@@ -1,21 +1,14 @@
+import { useQuery } from "react-query";
 import axios from "axios";
-import https from "https";
-import crypto from "crypto";
+import { Status, CharInfo, CharStatus, EquipInfo } from "../types/Types";
 
-// const api = axios.create({
-//     baseURL: "https://api.neople.co.kr/df",
-//     params: {
-//         apikey: process.env.API_KEY,
-//     },
-//     httpsAgent: new https.Agent({
-//         rejectUnauthorized: false,
-//         secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
-//     }),
-// });
-// const NeopleAPI = {
-//     getServers: () => api.get("/servers"),
-//     getCharacterList: (serverId: string, characterName: string) => api.get(`/servers/${serverId}/characters`, { params: { characterName: characterName } }),
-//     getCharacterInfo: (serverId: string, characterId: string) => api.get(`/servers/${serverId}/characters${characterId}`),
-// };
+const api = axios.create({
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/servers`,
+});
 
-// export default NeopleAPI;
+const getApi = {
+    getCharInfo: async (serverId: string, characterName: string) => (await api.get(`/${serverId}/characters?characterName=${characterName}`)).data,
+    getCharStatus: async (serverId: string, characterId: string) => (await api.get(`/${serverId}/characters/${characterId}/status`)).data,
+    getEquipInfo: async (serverId: string, characterId: string) => (await api.get(`/${serverId}/characters/${characterId}/equip/equipment`)).data,
+};
+export default getApi;

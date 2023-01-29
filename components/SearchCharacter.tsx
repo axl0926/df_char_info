@@ -5,7 +5,7 @@ import EquipDetail from "../components/EquipDetail";
 import useCharDataQuery from "../components/useCharDataQuery";
 
 export default function SearchCharacter({ selectedCharacter }: { selectedCharacter: { serverId: string; characterName: string } }) {
-    const { info, status, equip } = useCharDataQuery({ selectedCharacter });
+    const { info, status, equip } = useCharDataQuery({ ...selectedCharacter });
 
     return (
         <div id={styles.char_main}>

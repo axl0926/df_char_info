@@ -4,6 +4,7 @@ import axios from "axios";
 import https from "https";
 import crypto from "crypto";
 import colors from "colors";
+import { join } from "path";
 
 const API_URL = "https://api.neople.co.kr/df";
 
@@ -31,12 +32,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         let combinedPath = "";
         const { path, ...param } = req.query;
-        Array.isArray(path) && path.forEach((v) => (combinedPath += `/${v}`));
-
+        Array.isArray(path) && (combinedPath = join(...path));
         const r = await api.get(combinedPath, { params: param });
         printStatus(combinedPath, r.status, r.statusText);
         return res.status(200).send(r.data);
     } catch (error) {
         console.error(error);
+        return res.status(400).send(error);
     }
 }

@@ -1,22 +1,8 @@
-import React, { Suspense, useState, useRef } from "react";
+import React, { Suspense, useState } from "react";
 import SelectServer from "../components/server_select";
-// import Loading from "../components/Loading";
 import SearchCharacter from "../components/SearchCharacter";
-import styles from "../styles/Home.module.css";
-
-import html2canvas from "html2canvas";
 
 export default function Home() {
-    const onCapture = () => {
-        const char_info: HTMLElement | null = document.querySelector("#char_info");
-        if (char_info) {
-            html2canvas(char_info).then((canvas) => {
-                return canvas;
-            });
-        } else {
-            return <h1>로딩중</h1>;
-        }
-    };
     const [serverId, setServerId] = useState("cain");
     const [characterName, setCharacterName] = useState("");
     const [selectedCharacter, setSelectedCharacter] = useState({ serverId: serverId, characterName: characterName });
@@ -54,9 +40,6 @@ export default function Home() {
             <div id="char_info">
                 <Suspense fallback="loading..."> {isFirstSearch && <SearchCharacter selectedCharacter={selectedCharacter} />}</Suspense>
             </div>
-            <button className={styles.capture_button} onClick={onCapture}>
-                캡쳐
-            </button>
         </div>
     );
 }

@@ -1,6 +1,4 @@
-import { useQuery } from "react-query";
 import axios from "axios";
-import { Status, CharInfo, CharStatus, EquipInfo } from "../types/Types";
 
 const api = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/servers`,

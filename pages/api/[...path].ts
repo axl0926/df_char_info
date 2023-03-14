@@ -31,9 +31,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let combinedPath = "";
         const { path, ...param } = req.query;
         Array.isArray(path) && (combinedPath = join(...path));
+        console.log(combinedPath);
         const r = await api.get(combinedPath, { params: param });
         printStatus(combinedPath, r.status, r.statusText);
-        console.error(r.data?.rows?.length);
         return res.status(200).send(r.data);
     } catch (error) {
         if (axios.isAxiosError(error)) {

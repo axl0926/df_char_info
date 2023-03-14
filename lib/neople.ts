@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? `${window.location.protocol}//${window.location.host}/api` : '/api'
+  baseURL: 'https://df-profile-card-generator.vercel.app/api'
 });
 const getApi = {
     getCharInfo: async (serverId: string, characterName: string) => (await api.get(`/servers/${serverId}/characters?characterName=${characterName}`)).data,

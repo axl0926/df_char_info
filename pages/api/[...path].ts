@@ -27,7 +27,7 @@ const printStatus = (path: string, statusCode: number, statusText: string) => {
     }
 };
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    try {
+    /*try {
         let combinedPath = "";
         const { path, ...param } = req.query;
         Array.isArray(path) && (combinedPath = join(...path));
@@ -40,5 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             console.error(error.response);
         }
         return res.status(400).send(error);
-    }
+    }*/
+
+        return res.status(200).send('hello world');
 }

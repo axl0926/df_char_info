@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: `/api`,
+    baseURL: 'api'
 });
 const getApi = {
     getCharInfo: async (serverId: string, characterName: string) => (await api.get(`/servers/${serverId}/characters?characterName=${characterName}`)).data,

@@ -1,3 +1,9 @@
+export interface CharData {
+    info: Omit<CharInfo & CharStatus, "status">;
+    status: any;
+    equip: ItemSlot[];
+}
+
 export interface CharInfo extends DefaultCharInfo {
     serverId: string;
 }
@@ -10,7 +16,6 @@ interface DefaultCharInfo {
     jobName: string;
     jobGrowName: string;
 }
-
 export interface Status {
     name: string;
     value: number;
@@ -47,7 +52,7 @@ export interface ItemSlot {
     reinforce: number | null; //강화
     itemGradeName?: string; //등급
     enchant?: {
-        status?: {
+        status: {
             name: string;
             value: number;
         }[];

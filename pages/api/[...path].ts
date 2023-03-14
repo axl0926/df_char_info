@@ -1,12 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import axios, { AxiosError, isAxiosError } from "axios";
 import https from "https";
 import crypto from "crypto";
 import colors from "colors";
 import { join } from "path";
-
-const API_URL = "https://api.neople.co.kr/df";
 
 const api = axios.create({
     baseURL: "https://api.neople.co.kr/df",
@@ -35,9 +33,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         Array.isArray(path) && (combinedPath = join(...path));
         const r = await api.get(combinedPath, { params: param });
         printStatus(combinedPath, r.status, r.statusText);
+        console.error(r.data?.rows?.length);
         return res.status(200).send(r.data);
     } catch (error) {
-        console.error(error);
+        if (axios.isAxiosError(error)) {
+            console.error(error.response);
+        }
         return res.status(400).send(error);
     }
 }

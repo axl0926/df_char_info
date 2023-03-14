@@ -13,7 +13,6 @@ interface Servers {
 
 export default function SelectServer({ serverId, fc }: { serverId: string; fc: (e: React.ChangeEvent<HTMLSelectElement>) => void }) {
     const servers = useQuery<Servers, AxiosError>({ queryKey: ["df"], queryFn: async () => (await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/servers`)).data, suspense: true });
-
     return (
         <select value={serverId} id="server-select" onChange={fc}>
             {servers.data?.rows?.map((v: Server, i: number) => (

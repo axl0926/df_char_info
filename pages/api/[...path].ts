@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios, { AxiosError, isAxiosError } from "axios";
+import axios from "axios";
 import https from "https";
 import crypto from "crypto";
 import colors from "colors";
@@ -31,7 +31,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         let combinedPath = "";
         const { path, ...param } = req.query;
         Array.isArray(path) && (combinedPath = join(...path));
-        console.log(combinedPath);
         const r = await api.get(combinedPath, { params: param });
         printStatus(combinedPath, r.status, r.statusText);
         return res.status(200).send(r.data);

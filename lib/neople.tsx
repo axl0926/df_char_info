@@ -1,9 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: '/api'
+    baseURL: "/api",
 });
+
 const getApi = {
+    getServers: async () => (await api.get(`/servers`)).data,
     getCharInfo: async (serverId: string, characterName: string) => (await api.get(`/servers/${serverId}/characters?characterName=${characterName}`)).data,
     getCharStatus: async (serverId: string, characterId: string) => (await api.get(`/servers/${serverId}/characters/${characterId}/status`)).data,
     getEquipInfo: async (serverId: string, characterId: string) => (await api.get(`/servers/${serverId}/characters/${characterId}/equip/equipment`)).data,

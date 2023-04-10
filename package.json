@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@picocss/pico": "^1.5.9",
     "@toss/react-query": "^1.1.5",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",

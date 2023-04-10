@@ -10,12 +10,12 @@ export default function useCharDataQuery({ serverId, characterName }: { serverId
     }
     const [charInfo] = charInfoRes.data?.rows; 
     const charStatusRes = useSuspendedQuery<CharStatus>([`status_${serverId}_${characterName}`], () => getApi.getCharStatus(serverId, charInfo.characterId));
-    const charEquipRes = useSuspendedQuery<EquipInfo>([`equip_${serverId}_${characterName}`], async () => getApi.getEquipInfo(serverId, charInfo.characterId));
+    const charEquipRes = useSuspendedQuery<EquipInfo>([`equip_${serverId}_${characterName}`],  () => getApi.getEquipInfo(serverId, charInfo.characterId));
    
     
     const { status, ...charStatus } = charStatusRes.data; 
 
-    
+     
     const charEquip = charEquipRes?.data?.equipment;
 
     let statusObject: any = {};

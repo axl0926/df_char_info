@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 const getApi = {
-    getServers: async () => (await api.get(`/servers`)).data,
+    getCharList: async (serverId: string, characterName: string) => (await api.get(`/servers/${serverId}/characters?characterName=${characterName}&wordType=full`)).data,
     getCharInfo: async (serverId: string, characterName: string) => (await api.get(`/servers/${serverId}/characters?characterName=${characterName}`)).data,
     getCharStatus: async (serverId: string, characterId: string) => (await api.get(`/servers/${serverId}/characters/${characterId}/status`)).data,
     getEquipInfo: async (serverId: string, characterId: string) => (await api.get(`/servers/${serverId}/characters/${characterId}/equip/equipment`)).data,

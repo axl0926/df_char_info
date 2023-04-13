@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from "react";
 import {ErrorBoundary,FallbackProps} from 'react-error-boundary'
-import SelectServer from "../components/server_select";
-import SearchCharacter from "../components/SearchCharacter";
+import SelectServer from "../components/SelectServer";
+import SearchCharacterList from "../components/SearchCharacterList";
 
 function ErrorFallback({error, resetErrorBoundary}:FallbackProps) {
     return (
@@ -52,7 +52,7 @@ export default function Home() {
                 <Suspense fallback="loading...">
                     {isFirstSearch && (
                         <ErrorBoundary  FallbackComponent={ErrorFallback}>
-                            <SearchCharacter selectedCharacter={selectedCharacter} />{" "}
+                            <SearchCharacterList selectedCharacter={selectedCharacter} />{" "}
                         </ErrorBoundary>
                     )}
                 </Suspense>
